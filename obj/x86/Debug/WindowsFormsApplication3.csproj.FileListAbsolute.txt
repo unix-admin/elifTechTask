@@ -1,0 +1,12 @@
+c:\users\adm\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\bin\x86\Debug\WindowsFormsApplication3.exe.config
+c:\users\adm\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\bin\x86\Debug\WindowsFormsApplication3.exe
+c:\users\adm\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\bin\x86\Debug\WindowsFormsApplication3.pdb
+c:\users\adm\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\bin\x86\Debug\System.Data.SQLite.dll
+c:\users\adm\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\x86\Debug\WindowsFormsApplication3.csprojResolveAssemblyReference.cache
+c:\users\adm\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\x86\Debug\WindowsFormsApplication3.Form1.resources
+c:\users\adm\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\x86\Debug\WindowsFormsApplication3.Properties.Resources.resources
+c:\users\adm\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\x86\Debug\WindowsFormsApplication3.csproj.GenerateResource.Cache
+c:\users\adm\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\x86\Debug\WindowsFormsApplication3.exe
+c:\users\adm\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\x86\Debug\WindowsFormsApplication3.pdb
+c:\users\adm\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\bin\x86\Debug\System.Data.SQLite.pdb
+c:\users\adm\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\bin\x86\Debug\System.Data.SQLite.xml
