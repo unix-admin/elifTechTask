@@ -14,7 +14,7 @@ namespace WindowsFormsApplication3
     {
 
         private Database database = new Database();
-        private List<decimal> sum = new List<decimal>();
+        private List<double> sum = new List<double>();
         public Form1()
         {
             InitializeComponent();
@@ -27,7 +27,7 @@ namespace WindowsFormsApplication3
             paintTree();
         }
         //This megafunction is used for build tree
-        private void buildTree(TreeNode parent, int parent_id, List<decimal> sum)
+        private void buildTree(TreeNode parent, int parent_id, List<double> sum)
         {
             List<Database.companyData> root = database.getRoot(parent_id);
             if (root.Count > 0)
@@ -38,9 +38,9 @@ namespace WindowsFormsApplication3
                     TreeNode node = parent.Nodes.Add(data.name + " | $" + data.sumEstimate.ToString());
                     node.Tag = data.sumEstimate.ToString();                    
                     buildTree(node, data.id, sum);
-                    decimal sumEstimatePlusChild = 0;
+                    double sumEstimatePlusChild = 0;
                     sum.Add(data.sumEstimate);
-                    foreach (decimal sumEstimate in sum)
+                    foreach (double sumEstimate in sum)
                     {
                         sumEstimatePlusChild += sumEstimate;
                     }
@@ -73,6 +73,12 @@ namespace WindowsFormsApplication3
                 string[] company = treeView1.SelectedNode.Text.Split('|');
                 result = MessageBox.Show(this, "Are you sure to delete " + company[0] + "?", "Delete company", MessageBoxButtons.YesNo);
                 treeView1.SelectedNode = null;
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                   
+                   database.deleteData(database.getCompanyByName(company[0].ToString().TrimEnd()).id);
+                   paintTree();
+                }
             }
             
         }
@@ -95,6 +101,7 @@ namespace WindowsFormsApplication3
 
         private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
+            e.Node.Expand();
             Database.companyData companyToView = new Database.companyData();
             if (treeView1.SelectedNode != null && treeView1.SelectedNode.Parent != null)
             {
@@ -107,8 +114,7 @@ namespace WindowsFormsApplication3
                 paintTree();
             }
         }
-
-        
+               
     }
 
 }

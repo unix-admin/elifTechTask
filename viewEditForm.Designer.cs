@@ -68,6 +68,7 @@
             this.companyEstimate.Name = "companyEstimate";
             this.companyEstimate.Size = new System.Drawing.Size(106, 20);
             this.companyEstimate.TabIndex = 3;
+            this.companyEstimate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.companyEstimate_KeyPress);
             // 
             // labelParentCompany
             // 
@@ -109,8 +110,11 @@
             this.Controls.Add(this.labelCompanyEstimate);
             this.Controls.Add(this.companyName);
             this.Controls.Add(this.labelCompanyName);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "viewEditForm";
-            this.Text = "viewEditForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Insert company";
             this.Shown += new System.EventHandler(this.viewEditForm_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();

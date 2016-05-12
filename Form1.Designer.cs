@@ -89,7 +89,8 @@
             this.Controls.Add(this.insertButton);
             this.Controls.Add(this.treeView1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "ElifTech test task";
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.ResumeLayout(false);
 

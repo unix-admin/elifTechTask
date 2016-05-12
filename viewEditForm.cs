@@ -51,6 +51,7 @@ namespace WindowsFormsApplication3
                     if (companyData.parentId !=0)
                         parentCompanies.SelectedIndex = parentCompanies.Items.IndexOf(database.getCompany(companyData.parentId).name);
                     buttonAction.Text = "Update";
+                    this.Text = "Edit company";
                     break;                   
                 case formActions.VIEW:
                     companyName.Text = companyData.name.ToString();
@@ -62,6 +63,7 @@ namespace WindowsFormsApplication3
                     companyEstimate.Enabled = false;
                     parentCompanies.Enabled = false;
                     buttonAction.Text = "Close";
+                    this.Text = "View company";
                     break;
                 
             }
@@ -70,27 +72,53 @@ namespace WindowsFormsApplication3
 
         private void buttonAction_Click(object sender, EventArgs e)
         {
-            switch (action)
+            if (validateCompanyName(companyName.Text))
             {
+                switch (action)
+                {
+                    case formActions.UPDATE:
+                        updateData();
+                        break;
+                    case formActions.VIEW:
+                        Close();
+                        break;
+                    default:
+                        insertData();
+                        break;
+                }
+
+                Close();
+            }
+            else
+                MessageBox.Show("Company with name "+companyName.Text+" is already exist!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+        }
+
+        private bool validateCompanyName(string _companyName) {
+            bool result = true;
+            switch(action)
+            {
+                   
+                case formActions.INSERT:
+                    if (database.getCompanyByName(_companyName.TrimEnd()).id != 0)
+                        result = false;
+                    break;
                 case formActions.UPDATE:
-                    updateData();   
-                    break;
-                case formActions.VIEW:
-                    Close();
-                    break;
-                default:
-                    insertData();
+                    if (database.getCompanyByName(_companyName.TrimEnd()).id != companyData.id)
+                        result = false;
                     break;
             }
-            
-            Close();
+            return result;
+
         }
 
         private void insertData()
         {            
             Database.companyData newCompany= new Database.companyData();
             newCompany.name = companyName.Text;
-            newCompany.estimate = Convert.ToDecimal(companyEstimate.Text);
+            if (companyEstimate.Text != "")
+                newCompany.estimate = Convert.ToDouble(companyEstimate.Text);
+            else
+                newCompany.estimate = 0;
             if (parentCompanies.Text == "")
             {
                 newCompany.parentId = 0;
@@ -106,7 +134,10 @@ namespace WindowsFormsApplication3
         {
 
             companyData.name = companyName.Text;
-            companyData.estimate = Convert.ToDecimal(companyEstimate.Text);
+            if (companyEstimate.Text != "")
+                companyData.estimate = Convert.ToDouble(companyEstimate.Text);
+            else
+                companyData.estimate = 0;
             if (parentCompanies.Text == "")
             {
                 companyData.parentId = 0;
@@ -116,6 +147,12 @@ namespace WindowsFormsApplication3
                 companyData.parentId = database.getParentId(parentCompanies.Text);
             }
             database.updateData(companyData);
+        }
+
+        private void companyEstimate_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar <= 47 || e.KeyChar >= 58) && e.KeyChar != 8 && e.KeyChar !=44)
+            e.Handled = true;   
         }
 
         

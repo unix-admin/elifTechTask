@@ -20,8 +20,8 @@ namespace WindowsFormsApplication3
         {
             public int id;
             public string name;
-            public decimal estimate;
-            public decimal sumEstimate;
+            public double estimate;
+            public double sumEstimate;
             public int parentId;
         };
 
@@ -67,7 +67,7 @@ namespace WindowsFormsApplication3
             { 
                 data.id = Convert.ToInt16(reader[0]);
                 data.name = reader[1].ToString();
-                data.estimate = Convert.ToDecimal(reader[2]);
+                data.estimate = Convert.ToDouble(reader[2]);
                 data.parentId = Convert.ToInt16(reader[3]);
             }
             reader.Close();
@@ -137,7 +137,7 @@ namespace WindowsFormsApplication3
                 companyData data = new companyData();
                 data.id = Convert.ToInt16(row[0]);
                 data.name = row[1].ToString();
-                data.sumEstimate = Convert.ToDecimal(row[2]);
+                data.sumEstimate = Convert.ToDouble(row[2].ToString().Replace('.', ','));
                 data.parentId = Convert.ToInt16(row[3]);
                 root.Add(data);
             }
@@ -161,21 +161,28 @@ namespace WindowsFormsApplication3
                 companyData data = new companyData();
                 data.id = Convert.ToInt16(row[0]);
                 data.name = row[1].ToString();
-                data.sumEstimate = Convert.ToDecimal(row[2]);
+                data.sumEstimate = Convert.ToDouble(row[2]);
                 data.parentId = Convert.ToInt16(row[3]);
                 companies.Add(data);
             }
             return companies;
         }
 
-        private void deleteData(companyData data)
+        public void deleteData(int id)
         {
-            deleteSQLCommand.CommandText = "DELETE FROM data WHERE id=:id";            
+            List<Database.companyData> root = getRoot(id);
+            deleteSQLCommand.CommandText = "DELETE FROM data WHERE id=:id";
+            deleteSQLCommand.Connection = connection;
             connect();
-            deleteSQLCommand.Parameters.Add(":id", DbType.String);
-            deleteSQLCommand.Parameters[":id"].Value = data.id;
+            deleteSQLCommand.Parameters.Add(":id", DbType.Int16);
+            deleteSQLCommand.Parameters[":id"].Value = id;
             deleteSQLCommand.ExecuteNonQuery();
             disconnect();
+            if (root.Count > 0)
+                root.ForEach(delegate(Database.companyData data)
+                {                   
+                    deleteData(data.id);
+                });
         }
                
         public void insertData(companyData newRow)
@@ -186,8 +193,8 @@ namespace WindowsFormsApplication3
             insertData.CommandText = "INSERT INTO data (name,estimated,parent_id) VALUES(:name,:estimated,:parent_id)";
             insertData.Parameters.Add(":name", DbType.String);
             insertData.Parameters[":name"].Value = newRow.name;
-            insertData.Parameters.Add(":estimated", DbType.String);
-            insertData.Parameters[":estimated"].Value = newRow.estimate.ToString();
+            insertData.Parameters.Add(":estimated", DbType.Double);
+            insertData.Parameters[":estimated"].Value = newRow.estimate;
             insertData.Parameters.Add(":parent_id", DbType.String);
             insertData.Parameters[":parent_id"].Value = newRow.parentId.ToString();
             connect();
@@ -204,7 +211,7 @@ namespace WindowsFormsApplication3
             insertData.CommandText = "UPDATE data SET name=:name, estimated=:estimated,parent_id=:parent_id WHERE id=:id";
             insertData.Parameters.Add(":name", DbType.String);
             insertData.Parameters[":name"].Value = newRow.name;
-            insertData.Parameters.Add(":estimated", DbType.Decimal);
+            insertData.Parameters.Add(":estimated", DbType.Double);
             insertData.Parameters[":estimated"].Value = newRow.estimate;
             insertData.Parameters.Add(":parent_id", DbType.Int16);
             insertData.Parameters[":parent_id"].Value = newRow.parentId;
@@ -231,7 +238,7 @@ namespace WindowsFormsApplication3
             {
                 data.id = Convert.ToInt16(reader[0]);
                 data.name = reader[1].ToString();
-                data.estimate = Convert.ToDecimal(reader[2]);
+                data.estimate = Convert.ToDouble(reader[2]);
                 data.parentId = Convert.ToInt16(reader[3]);
             }
             reader.Close();
