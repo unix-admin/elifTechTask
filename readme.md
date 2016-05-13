@@ -1,27 +1,16 @@
-## Laravel PHP Framework
+## Nick Zorych test task
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+## Technologies 
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+I used MIcrosoft Visual Studio 2012 for coding and to provide access to database I used System.Data.SQLite library.
 
-## Official Documentation
+This project require the appropriate version of the Microsoft Visual C++ Runtime Library, to be successfully installed on the target machine, prior to making use of the executables contained therein. It should also be noted that the downloadable packages on this web page that include the word "setup" (i.e. the setup packages) already include and will attempt to automatically install the required version of the Microsoft Visual C++ Runtime Library.
+Latest Microsoft Visual C++ Runtime Library Downloads
+For detailed information about the latest downloads for each Microsoft Visual C++ Runtime Library release, please refer to the following page: 
+[Latest Supported Visual C++ Downloads](https://support.microsoft.com/ru-ru/kb/2977003)
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+## Database
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-### License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Database name can be "database.db"
+You can see the database script in file database.sql  
