@@ -26,19 +26,12 @@ namespace WindowsFormsApplication3
         };
 
         private SQLiteConnection connection;
-        private SQLiteCommand selectSQLCommand = new SQLiteCommand();
-        private SQLiteCommand insertSQLCommand = new SQLiteCommand();
-        private SQLiteCommand updateSQLCommand = new SQLiteCommand();
-        private SQLiteCommand deleteSQLCommand = new SQLiteCommand();
+  
 
         public Database()
         {
             string dir = Directory.GetCurrentDirectory();
             connection = new SQLiteConnection("Data Source=" + dir + "\\database.db;Version=3;New=True;");
-            insertSQLCommand.Connection = connection;
-            selectSQLCommand.Connection = connection;
-            updateSQLCommand.Connection = connection;
-
         }
 
         private void connect()
@@ -52,7 +45,7 @@ namespace WindowsFormsApplication3
                 connection.Close();
             
         }
-
+        //Function is used for get company data by id in database
         public companyData getCompany(int id) { 
             companyData data = new companyData();
             SQLiteDataReader reader = null;
@@ -75,7 +68,7 @@ namespace WindowsFormsApplication3
             disconnect();
             return data;
         }
-
+        //Function is used for get company id in database by company name
         public int getParentId(string companyName)
         {
             int companyId = 0;
@@ -96,7 +89,7 @@ namespace WindowsFormsApplication3
             disconnect();
             return companyId;
         }
-
+        //Function is used for get count of child companies by id of parent company
         public int getCount(int id)
         {
             int count = 0;
@@ -117,7 +110,7 @@ namespace WindowsFormsApplication3
             disconnect();
             return count;
         }
-
+        //Function is used for get list of child companies by id of parent company
         public List<companyData> getRoot(int id)
         {
             List<companyData> root = new List<companyData>();            
@@ -143,7 +136,7 @@ namespace WindowsFormsApplication3
             }
             return root;
         }
-
+        //Function is used for get list of all companies in the database
         public List<companyData> getAllCompanies()
         {
             List<companyData> companies = new List<companyData>();
@@ -167,9 +160,10 @@ namespace WindowsFormsApplication3
             }
             return companies;
         }
-
+        //Function is used for delete company from database
         public void deleteData(int id)
         {
+            SQLiteCommand deleteSQLCommand = new SQLiteCommand();
             List<Database.companyData> root = getRoot(id);
             deleteSQLCommand.CommandText = "DELETE FROM data WHERE id=:id";
             deleteSQLCommand.Connection = connection;
@@ -184,7 +178,7 @@ namespace WindowsFormsApplication3
                     deleteData(data.id);
                 });
         }
-               
+        //Function is used for insert company to the database
         public void insertData(companyData newRow)
         {
             
@@ -202,7 +196,7 @@ namespace WindowsFormsApplication3
             disconnect();
             
         }
-
+        //Function is used for modify company data in the database
         public void updateData(companyData newRow)
         {
 
@@ -222,7 +216,7 @@ namespace WindowsFormsApplication3
             disconnect();
 
         }
-
+        //Function is used for get company data from the database by company name
         public companyData getCompanyByName(string name)
         {
             companyData data = new companyData();

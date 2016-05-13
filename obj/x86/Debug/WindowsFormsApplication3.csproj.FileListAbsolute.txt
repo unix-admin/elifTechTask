@@ -21,3 +21,5 @@ C:\Users\adm\documents\visual studio 2012\Projects\WindowsFormsApplication3\Wind
 C:\Users\adm\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\bin\x86\Debug\System.Data.SQLite.xml
 C:\Users\adm\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\x86\Debug\WindowsFormsApplication3.exe
 C:\Users\adm\documents\visual studio 2012\Projects\WindowsFormsApplication3\WindowsFormsApplication3\obj\x86\Debug\WindowsFormsApplication3.pdb
+D:\Profile\Documents\Visual Studio 2012\Projects\eliftech\bin\x86\Debug\System.Data.SQLite.pdb
+D:\Profile\Documents\Visual Studio 2012\Projects\eliftech\bin\x86\Debug\System.Data.SQLite.xml

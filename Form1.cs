@@ -19,7 +19,7 @@ namespace WindowsFormsApplication3
         {
             InitializeComponent();
         }
-
+        //Action when insert button was clicked
         private void insertButton_Click(object sender, EventArgs e)
         {
             viewEditForm insert = new viewEditForm();
@@ -49,12 +49,12 @@ namespace WindowsFormsApplication3
                 });
 
         }
-
+        //Action when form was shown
         private void Form1_Shown(object sender, EventArgs e)
         {
             paintTree();
         }
-
+        //This megafunction is used for painting comanies tree in treeview
         private void paintTree() 
         {
 
@@ -64,57 +64,57 @@ namespace WindowsFormsApplication3
             treeView1.ExpandAll();
 
         }
-
+        //Action when delete button was clicked
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (treeView1.SelectedNode != null && treeView1.SelectedNode.Parent != null)
             {
                 DialogResult result;
-                string[] company = treeView1.SelectedNode.Text.Split('|');
-                result = MessageBox.Show(this, "Are you sure to delete " + company[0] + "?", "Delete company", MessageBoxButtons.YesNo);
-                treeView1.SelectedNode = null;
+                result = MessageBox.Show(this, "Are you sure to delete " + getCompanyIdByNode(treeView1.SelectedNode).name + "?", "Delete company", MessageBoxButtons.YesNo);
+                
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
-                   
-                   database.deleteData(database.getCompanyByName(company[0].ToString().TrimEnd()).id);
+                   database.deleteData(getCompanyIdByNode(treeView1.SelectedNode).id);
+                   treeView1.SelectedNode = null;
                    paintTree();
                 }
+                
             }
             
         }
-       
+        //Action when edit button was clicked
         private void buttonEdit_Click(object sender, EventArgs e)
-        {
-            Database.companyData companyToEdit = new Database.companyData();     
+        {            
             if (treeView1.SelectedNode != null && treeView1.SelectedNode.Parent != null)
-            {
-                string[] company = treeView1.SelectedNode.Text.Split('|');
-                companyToEdit = database.getCompanyByName(company[0].ToString().TrimEnd());
-                treeView1.SelectedNode = null;
+            {   
                 viewEditForm formToEdit = new viewEditForm();
-                formToEdit.setData(viewEditForm.formActions.UPDATE, companyToEdit.id);
+                formToEdit.setData(viewEditForm.formActions.UPDATE, getCompanyIdByNode(treeView1.SelectedNode).id);
+                treeView1.SelectedNode = null;
                 formToEdit.ShowDialog();
                 paintTree();
             }
             
         }
-
+        //Action when treeview node was doubleclicked
         private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            e.Node.Expand();
-            Database.companyData companyToView = new Database.companyData();
+            e.Node.Expand();            
             if (treeView1.SelectedNode != null && treeView1.SelectedNode.Parent != null)
-            {
-                string[] company = treeView1.SelectedNode.Text.Split('|');
-                companyToView = database.getCompanyByName(company[0].ToString().TrimEnd());
-                treeView1.SelectedNode = null;
+            {                                                
                 viewEditForm formToView = new viewEditForm();
-                formToView.setData(viewEditForm.formActions.VIEW, companyToView.id);
+                formToView.setData(viewEditForm.formActions.VIEW, getCompanyIdByNode(treeView1.SelectedNode).id);
+                treeView1.SelectedNode = null;
                 formToView.ShowDialog();
                 paintTree();
             }
         }
+        //This megafunction is used for geting company data by selected node in treeview
+        private Database.companyData getCompanyIdByNode(TreeNode node)
+        {
+            string[] company = node.Text.Split('|');
+            return database.getCompanyByName(company[0].ToString().TrimEnd());
+        }
                
-    }
+    }    
 
 }

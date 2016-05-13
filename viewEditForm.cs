@@ -27,13 +27,13 @@ namespace WindowsFormsApplication3
         }
 
 
-
+        //Function is used for set global action
         public void setData(formActions _action, int companyId)
         {
             action = _action;
             companyData = database.getCompany(companyId);
         }
-
+        //Action when form is shown 
         private void viewEditForm_Shown(object sender, EventArgs e)
         {
             parentCompanies.Items.Add("");
@@ -69,7 +69,7 @@ namespace WindowsFormsApplication3
             }
               
         }
-
+        //Action when the button was clicked
         private void buttonAction_Click(object sender, EventArgs e)
         {
             if (validateCompanyName(companyName.Text))
@@ -90,9 +90,9 @@ namespace WindowsFormsApplication3
                 Close();
             }
             else
-                MessageBox.Show("Company with name "+companyName.Text+" is already exist!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Company with name "+companyName.Text+" is already exists!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
         }
-
+        //Function is used for validate company name
         private bool validateCompanyName(string _companyName) {
             bool result = true;
             switch(action)
@@ -110,7 +110,7 @@ namespace WindowsFormsApplication3
             return result;
 
         }
-
+        //Function is used for insert data
         private void insertData()
         {            
             Database.companyData newCompany= new Database.companyData();
@@ -129,7 +129,7 @@ namespace WindowsFormsApplication3
             }
             database.insertData(newCompany);            
         }
-
+        //Function is used for update data
         private void updateData()
         {
 
@@ -148,7 +148,7 @@ namespace WindowsFormsApplication3
             }
             database.updateData(companyData);
         }
-
+        //Function is used for provide allow only digits
         private void companyEstimate_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((e.KeyChar <= 47 || e.KeyChar >= 58) && e.KeyChar != 8 && e.KeyChar !=44)
